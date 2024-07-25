@@ -17,6 +17,7 @@ const Profilebox = ({ profileData }) => {
 export default Profilebox;
 
 const ProfileContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 350px;

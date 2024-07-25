@@ -15,8 +15,8 @@ export default ThemeButton;
 const SwitchContainer = styled.div`
   @media ${media.mobilePortrait} {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    right: 20px;
+    top: 10px;
   }
 `;
 const SwitchBox = styled.label`

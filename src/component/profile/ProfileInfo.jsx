@@ -4,8 +4,8 @@ const ProfileInfo = ({ name, items }) => (
   <ProfileInfoBox>
     <ProfileName>{name}</ProfileName>
     <ProfileList>
-      {items.map((item) => (
-        <Table key={item.label} label={item.label} value={item.value} />
+      {items.map((item, idx) => (
+        <Table key={idx} label={item.label} value={item.value} />
       ))}
     </ProfileList>
   </ProfileInfoBox>
