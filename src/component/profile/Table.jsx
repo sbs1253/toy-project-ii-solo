@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-const Table = ({ key, label, value }) => {
+const Table = ({ label, value }) => {
   return (
-    <TableListItem key={key}>
+    <TableListItem>
       <Label>{label}</Label>
       <Value>{value}</Value>
     </TableListItem>

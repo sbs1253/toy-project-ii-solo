@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Profilebox from '../../component/profile/Profilebox';
+import Profilebox from '../../component/profile';
 
 const Home = () => {
   const profileData = {

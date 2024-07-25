@@ -8,6 +8,7 @@ import ThemeButton from './component/ThemeButton';
 import Home from './page/user/Home';
 import Login from './page/user/Login';
 import Navbar from './component/Navbar';
+import PayrollDetails from './page/user/PayrollDetails';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/payroll-details" element={<PayrollDetails />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
