@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themes/themes';
 import { GlobalStyle } from './themes/GlobalStyle';
-
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import ThemeButton from './component/ThemeButton';
 import Home from './page/user/Home';
 import Login from './page/user/Login';
@@ -18,19 +19,21 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-        <GlobalStyle />
-        <ThemeButton onClick={toggleTheme} />
-        <Navbar />
+    <Provider store={store}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+          <GlobalStyle />
+          <ThemeButton onClick={toggleTheme} />
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/payroll-details" element={<PayrollDetails />} />
-        </Routes>
-      </ThemeProvider>
-    </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/payroll-details" element={<PayrollDetails />} />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
