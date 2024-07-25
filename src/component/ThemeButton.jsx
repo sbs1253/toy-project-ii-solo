@@ -20,7 +20,7 @@ const SwitchContainer = styled.div`
   }
 `;
 const SwitchBox = styled.label`
-  font-size: 17px;
+  font-size: 12px;
   position: relative;
   display: inline-block;
   width: 3.5em;

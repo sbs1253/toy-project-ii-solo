@@ -49,11 +49,20 @@ export const GlobalStyle = styled.createGlobalStyle`
     background-color: ${(props) => props.theme.colors.background[1]};
     color: ${(props) => props.theme.colors.text.body};
     font-family: 'Pretendard-Regular' !important;
+    overflow: hidden;
+  }
 
-    & #root {
-      width: 100%;
-      height: 100%;
-    }
+  & #root {
+    width: 100%;
+    height: 100%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+    font-family: 'Pretendard Regular', sans-serif !important;
+    color: inherit;
   }
   @font-face {
     font-family: 'Pretendard-Regular';
