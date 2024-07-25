@@ -10,15 +10,35 @@ const initialState = {
       { label: '이메일', value: 'hello@gmail.com' },
     ],
   },
-  payrollData: {
-    title: '6월 급여 명세서',
-    manager: '담당자: 송병훈',
-    items: [
-      { label: '급여일', value: '24.07.01' },
-      { label: '지급 총액', value: '5,000,000' },
-      { label: '실지급액', value: '4,000,000' },
-    ],
-  },
+  payrollData: [
+    {
+      title: '6월 급여 명세서',
+      manager: '담당자: 송병훈',
+      items: [
+        { label: '급여일', value: '24.07.01' },
+        { label: '지급 총액', value: '5,000,000' },
+        { label: '실지급액', value: '4,000,000' },
+      ],
+    },
+    {
+      title: '5월 급여 명세서',
+      manager: '담당자: 송병훈',
+      items: [
+        { label: '급여일', value: '24.06.01' },
+        { label: '지급 총액', value: '4,000,000' },
+        { label: '실지급액', value: '3,000,000' },
+      ],
+    },
+    {
+      title: '4월 급여 명세서',
+      manager: '담당자: 송병훈',
+      items: [
+        { label: '급여일', value: '24.05.01' },
+        { label: '지급 총액', value: '3,000,000' },
+        { label: '실지급액', value: '2,000,000' },
+      ],
+    },
+  ],
 };
 
 const profileReducer = (state = initialState, action) => {

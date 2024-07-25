@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PayrollList from './List';
-
+import { SmallButton } from '../Button.styles';
 const Card = ({ payrollData }) => {
   return (
     <CardContainer>
@@ -16,7 +16,7 @@ const Card = ({ payrollData }) => {
         </div>
       </CardTitle>
       <PayrollList items={payrollData.items} />
-      <ActionButton>급여명세확인</ActionButton>
+      <SmallButton>급여명세확인</SmallButton>
     </CardContainer>
   );
 };
@@ -37,6 +37,10 @@ const CardContainer = styled.div`
   margin-top: 20px;
   border: 2px solid ${(props) => props.theme.colors.stroke[3]};
   border-radius: 10px;
+
+  ${SmallButton} {
+    align-self: flex-end;
+  }
 `;
 
 const CardTitle = styled.div`
@@ -61,16 +65,4 @@ const CardTitle = styled.div`
     line-height: var(--line-height-caption);
     color: ${(props) => props.theme.colors.text.bodySubtle};
   }
-`;
-
-const ActionButton = styled.button`
-  align-self: flex-end;
-  font-size: 0.9em;
-  font-weight: 500;
-  background-color: ${(props) => props.theme.colors.text.title};
-  color: ${(props) => props.theme.colors.background[1]};
-  padding: 8px 15px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
 `;

@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 const PayrollDetails = () => {
   const profileData = useSelector((state) => state.profileData);
   const payrollData = useSelector((state) => state.payrollData);
-
+  console.log(payrollData);
   return (
     <PayrollContainer>
       <Profilebox profileData={profileData} />
       <PayrollBox>
         <PayrollTitle>급여 명세</PayrollTitle>
-        <PayrollCard payrollData={payrollData} />
-        <PayrollCard payrollData={payrollData} />
-        <PayrollCard payrollData={payrollData} />
+        {payrollData.map((data) => (
+          <PayrollCard payrollData={data} />
+        ))}
       </PayrollBox>
     </PayrollContainer>
   );
@@ -32,7 +32,6 @@ const PayrollBox = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 800px;
-  padding: 20px;
   margin: 0 auto;
 `;
 
