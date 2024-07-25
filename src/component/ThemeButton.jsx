@@ -17,6 +17,7 @@ const SwitchContainer = styled.div`
     position: absolute;
     right: 20px;
     top: 10px;
+    z-index: 2;
   }
 `;
 const SwitchBox = styled.label`

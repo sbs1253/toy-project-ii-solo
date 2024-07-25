@@ -1,6 +1,8 @@
 import { styled } from 'styled-components';
 import { media } from '../../themes/media';
 import { useNavigate } from 'react-router-dom';
+import { LargeButton, SmallButton } from '../../component/Button.styles';
+
 const Login = () => {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -25,10 +27,10 @@ const Login = () => {
 
           <LoginInputField placeholder="Password" id="password" type="password" />
         </LoginInputBox>
-        <LoginButton type="submit">Submit</LoginButton>
+        <LargeButton type="submit">Submit</LargeButton>
         <SignupBox>
           <p>Don't have any account?</p>
-          <span>Sign up</span>
+          <SmallButton onClick={(e) => e.preventDefault()}>Sign up</SmallButton>
         </SignupBox>
       </LoginForm>
     </LoginContainer>
@@ -42,7 +44,9 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: ${(props) => props.theme.colors.background[2]};
+  background-color: ${(props) => {
+    props.theme.colors.background[2];
+  }};
 `;
 const LoginForm = styled.form`
   width: 280px;
@@ -96,25 +100,6 @@ const LoginInputField = styled.input`
   }
 `;
 
-const LoginButton = styled.button`
-  position: relative;
-  width: 100%;
-  height: 40px;
-  border: 2px solid ${(props) => props.theme.colors.primary.normal};
-  background-color: ${(props) => props.theme.colors.primary.normal};
-  color: ${(props) => props.theme.colors.text.title};
-  font-size: 0.8em;
-  font-weight: 500;
-  letter-spacing: 1px;
-  border-radius: 30px;
-  margin: 10px;
-  cursor: pointer;
-  overflow: hidden;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primary.hover};
-  }
-`;
 const SignupBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -126,15 +111,5 @@ const SignupBox = styled.div`
     font-size: var(--font-size-body-regular);
     font-weight: var(--font-weight-body-regular);
     color: ${(props) => props.theme.colors.text.title};
-  }
-
-  & span {
-    font-size: 0.7em;
-    font-weight: 500;
-    background-color: ${(props) => props.theme.colors.text.title};
-    color: ${(props) => props.theme.colors.background[1]};
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 20px;
   }
 `;
