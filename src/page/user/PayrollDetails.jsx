@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 import Profilebox from '../../component/profile';
-import PayrollCard from '../../component/card';
+import Card from '../../component/card';
 import { useDispatch, useSelector } from 'react-redux';
 const PayrollDetails = () => {
   const profileData = useSelector((state) => state.profileData);
   const payrollData = useSelector((state) => state.payrollData);
-  console.log(payrollData);
   return (
     <PayrollContainer>
       <Profilebox profileData={profileData} />
       <PayrollBox>
         <PayrollTitle>급여 명세</PayrollTitle>
         {payrollData.map((data) => (
-          <PayrollCard payrollData={data} />
+          <Card payrollData={data} text={'급여 명세 확인'} />
         ))}
       </PayrollBox>
     </PayrollContainer>

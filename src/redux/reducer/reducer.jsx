@@ -10,6 +10,7 @@ const initialState = {
       { label: '이메일', value: 'hello@gmail.com' },
     ],
   },
+
   payrollData: [
     {
       title: '6월 급여 명세서',
@@ -36,6 +37,19 @@ const initialState = {
         { label: '급여일', value: '24.05.01' },
         { label: '지급 총액', value: '3,000,000' },
         { label: '실지급액', value: '2,000,000' },
+      ],
+    },
+  ],
+
+  correctionData: [
+    {
+      title: '6월 급여 명세서',
+      manager: '담당자: 송병훈',
+      items: [
+        { label: '날짜', value: '24.07.01' },
+        { label: '내용', value: '정정신청1' },
+        { label: '비고', value: '' },
+        { label: '상태', value: '처리중' },
       ],
     },
   ],

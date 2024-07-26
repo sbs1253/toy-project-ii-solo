@@ -17,7 +17,7 @@ export default List;
 const ListContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 40px;
   width: 100%;
 `;
 

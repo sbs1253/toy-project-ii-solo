@@ -5,6 +5,7 @@ const ButtonBase = styled.button`
   border: none;
   cursor: pointer;
 `;
+
 export const LargeButton = styled(ButtonBase)`
   width: 200px;
   height: 40px;

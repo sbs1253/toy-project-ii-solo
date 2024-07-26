@@ -11,15 +11,18 @@ const Navbar = () => {
       <NavbarButton onClick={() => handleNavigate('/')}>
         <ion-icon name="home-outline"></ion-icon>
       </NavbarButton>
-      <NavbarButton onClick={() => handleNavigate('/login')}>
-        <ion-icon name="log-in-outline"></ion-icon>
-      </NavbarButton>
-      <NavbarButton onClick={() => handleNavigate('/login')}>
-        <ion-icon name="log-out-outline"></ion-icon>
-      </NavbarButton>
       <NavbarButton onClick={() => handleNavigate('/payroll-details')}>
         <ion-icon name="cash-outline"></ion-icon>
       </NavbarButton>
+      <NavbarButton onClick={() => handleNavigate('/correction-request-records')}>
+        <ion-icon name="file-tray-full-outline"></ion-icon>
+      </NavbarButton>
+      <NavbarButton onClick={() => handleNavigate('/login')}>
+        <ion-icon name="log-in-outline"></ion-icon>
+      </NavbarButton>
+      {/* <NavbarButton onClick={() => handleNavigate('/login')}>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </NavbarButton> */}
     </NavbarContainer>
   );
 };

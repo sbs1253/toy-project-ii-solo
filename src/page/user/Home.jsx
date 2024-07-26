@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Home = () => {
   const dispatch = useDispatch();
   const profileData = useSelector((state) => state.profileData);
+  console.log(profileData);
 
   const profile = {
     name: '김철수',

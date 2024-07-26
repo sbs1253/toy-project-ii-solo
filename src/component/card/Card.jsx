@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import PayrollList from './List';
+import List from './List';
 import { SmallButton } from '../Button.styles';
-const Card = ({ payrollData }) => {
+const Card = ({ payrollData, text }) => {
+  console.log(text);
   return (
     <CardContainer>
       <CardTitle>
@@ -15,8 +16,8 @@ const Card = ({ payrollData }) => {
           <p>{payrollData.manager}</p>
         </div>
       </CardTitle>
-      <PayrollList items={payrollData.items} />
-      <SmallButton>급여명세확인</SmallButton>
+      <List items={payrollData.items} />
+      <CardButton $text={text}>{text}</CardButton>
     </CardContainer>
   );
 };
@@ -38,11 +39,16 @@ const CardContainer = styled.div`
   border: 2px solid ${(props) => props.theme.colors.stroke[3]};
   border-radius: 10px;
 
-  ${SmallButton} {
+  /* <SmallButton $text={'취소'}>{text}</SmallButton> 이렇게 하려고 했으나
+      CardContainer안에 선언한 스타일컴포넌트는 <CardContainer $text={'취소'}> 
+      이렇게 전달해야 사용할 수 있음*/
+  /* ${SmallButton} {
     align-self: flex-end;
-  }
+    background-color: ${(props) => {
+    props.text == '취소' ? props.theme.colors.danger.normal : props.theme.colors.background.primary;
+  }};
+  } */
 `;
-
 const CardTitle = styled.div`
   display: flex;
   align-items: center;
@@ -65,4 +71,10 @@ const CardTitle = styled.div`
     line-height: var(--line-height-caption);
     color: ${(props) => props.theme.colors.text.bodySubtle};
   }
+`;
+
+const CardButton = styled(SmallButton)`
+  align-self: flex-end;
+  background-color: ${(props) =>
+    props.$text === '취소' ? props.theme.colors.danger.normal : props.theme.colors.background.primary};
 `;
