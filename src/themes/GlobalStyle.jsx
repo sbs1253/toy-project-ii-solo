@@ -8,6 +8,7 @@ import reset from 'styled-reset';
 // createGlobalStyle은 Prettier이 작동하지 않는 오류가 있었음
 // styled 라는 키워드를 사용하면 자동완성이 되는 설정을 이용해서
 // styled 변수에 createGlobalStyle을 넣어서 사용하면 적용이 잘 됨
+
 const styled = { createGlobalStyle };
 export const GlobalStyle = styled.createGlobalStyle`
   ${reset} /* 추가적인 글로벌 스타일 정의 */
@@ -40,6 +41,7 @@ export const GlobalStyle = styled.createGlobalStyle`
     --line-height-caption: 18px;
     --font-weight-caption: 400;
   }
+
   body {
     width: 100vw;
     height: 100vh;
