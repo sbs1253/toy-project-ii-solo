@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import List from './List';
 import { SmallButton } from '../Button.styles';
-const Card = ({ payrollData, text }) => {
+const Card = ({ payrollData, src, text }) => {
   console.log(text);
   return (
     <CardContainer>
       <CardTitle>
-        <img
-          src="https://image-resource.creatie.ai/129853559902101/129853559902103/7670a02d70b97771fd9d1947c01fb670.png"
-          alt="아이콘"
-          className="image"
-        />
+        {src ? (
+          <img src={src} alt="아이콘" />
+        ) : (
+          <img
+            src="https://image-resource.creatie.ai/129853559902101/129853559902103/7670a02d70b97771fd9d1947c01fb670.png"
+            alt="아이콘"
+          />
+        )}
         <div>
           <h2>{payrollData.title}</h2>
           <p>{payrollData.manager}</p>
