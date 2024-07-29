@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
   profileData: {
     name: '송병훈',
@@ -43,7 +45,7 @@ const initialState = {
 
   correctionData: [
     {
-      title: '6월 급여 명세서',
+      title: '6월 급여 정정신청',
       manager: '담당자: 송병훈',
       items: [
         { label: '날짜', value: '24.07.01' },
@@ -55,21 +57,34 @@ const initialState = {
   ],
 };
 
-const profileReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_PROFILE_DATA':
-      return {
-        ...state,
-        profileData: action.payload,
-      };
-    case 'SET_PAYROLL_DATA':
-      return {
-        ...state,
-        payrollData: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+// const profileReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case 'SET_PROFILE_DATA':
+//       return {
+//         ...state,
+//         profileData: action.payload,
+//       };
+//     case 'SET_PAYROLL_DATA':
+//       return {
+//         ...state,
+//         payrollData: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
-export default profileReducer;
+const profileReducer = createSlice({
+  name: 'profile',
+  initialState,
+  reducers: {
+    setProfileData: (state, action) => {
+      state.profileData = action.payload;
+    },
+    setPayrollData: (state, action) => {
+      state.payrollData = action.payload;
+    },
+  },
+});
+console.log(profileReducer);
+export default profileReducer.reducer;

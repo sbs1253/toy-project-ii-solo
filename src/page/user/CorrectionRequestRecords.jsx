@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Card from '../../component/card';
 const CorrectionRequestRecords = () => {
-  const profileData = useSelector((state) => state.profileData);
+  const profileData = useSelector((state) => {
+    console.log(state);
+    return state.profileData;
+  });
   const correctionData = useSelector((state) => state.correctionData);
-  console.log(correctionData);
+  const iconSrc =
+    'https://image-resource.creatie.ai/129853559902101/129853559902103/d52a3cab2e07adcfb4a3fc44f581abd0.png';
   return (
     <CorrectionContainer>
       <Profilebox profileData={profileData} />
@@ -13,7 +17,7 @@ const CorrectionRequestRecords = () => {
         <CorrectTitle>정정내역</CorrectTitle>
 
         {correctionData.map((data) => (
-          <Card payrollData={data} text={'취소'} />
+          <Card payrollData={data} text={'취소'} src={iconSrc} />
         ))}
       </CorrectionBox>
     </CorrectionContainer>
