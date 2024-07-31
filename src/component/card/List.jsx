@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const List = ({ items }) => {
+  // console.log(items);
   return (
     <ListContainer>
-      {items.map((item, index) => (
+      {items?.map(({ label, value }, index) => (
         <ListItem key={index}>
-          <Label>{item.label}</Label>
-          <Value>{item.value}</Value>
+          <Label>{label || ''}</Label>
+          <Value>{value || ''}</Value>
         </ListItem>
       ))}
     </ListContainer>
@@ -29,6 +30,7 @@ const ListItem = styled.div`
 `;
 
 const Label = styled.span`
+  min-width: 40px;
   color: ${(props) => props.theme.colors.text.body};
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-caption);

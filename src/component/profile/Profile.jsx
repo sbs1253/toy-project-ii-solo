@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ProfileInfo from './ProfileInfo';
 import ProfileImage from './ProfileImage';
-const Profilebox = ({ profileData }) => {
+const Profile = ({ profileData }) => {
   return (
     <ProfileContainer>
       <ProfileImage src={profileData.imageSrc} alt="Avatar" />
@@ -14,7 +14,7 @@ const Profilebox = ({ profileData }) => {
   );
 };
 
-export default Profilebox;
+export default Profile;
 
 const ProfileContainer = styled.div`
   position: relative;

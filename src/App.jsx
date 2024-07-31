@@ -11,6 +11,7 @@ import Login from './page/user/Login';
 import Navbar from './component/Navbar';
 import PayrollDetails from './page/user/PayrollDetails';
 import CorrectionRequestRecords from './page/user/CorrectionRequestRecords';
+import Layout from './page/user/Layout';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -28,10 +29,12 @@ function App() {
           <Navbar />
 
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="payroll-details" element={<PayrollDetails />} />
+              <Route path="correction-request-records" element={<CorrectionRequestRecords />} />
+            </Route>
             <Route path="/login" element={<Login />} />
-            <Route path="/payroll-details" element={<PayrollDetails />} />
-            <Route path="/correction-request-records" element={<CorrectionRequestRecords />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

@@ -1,23 +1,47 @@
+import app from '../../firebase';
 import { styled } from 'styled-components';
 import { media } from '../../themes/media';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { fetchLogin } from '../../redux/reducer/userThunks';
 import { LargeButton, SmallButton } from '../../component/Button.styles';
+import { useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Login = () => {
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate('/');
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const userStatus = useSelector((state) => state.user.status);
+  if (userStatus === 'succeeded') {
+    return <Navigate to="/" />;
+  }
+  const onSubmit = ({ email, password }) => {
+    setLoading(true);
+    dispatch(fetchLogin({ email, password }));
+    setLoading(false);
   };
   return (
     <LoginContainer>
-      <LoginForm onSubmit={handleSubmit}>
+      <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <LoginText>Login</LoginText>
         <LoginInputBox>
           <LoginInputIcon>
             <ion-icon name="information-outline"></ion-icon>
           </LoginInputIcon>
-          <LoginInputField type="text" placeholder="Userid" id="userid" />
+          <LoginInputField
+            type="email"
+            placeholder="Email"
+            id="email"
+            {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+          />
+          {errors.email && <ErrorText>필수 입력입니다.</ErrorText>}
         </LoginInputBox>
 
         <LoginInputBox>
@@ -25,9 +49,19 @@ const Login = () => {
             <ion-icon name="key-outline"></ion-icon>
           </LoginInputIcon>
 
-          <LoginInputField placeholder="Password" id="password" type="password" />
+          <LoginInputField
+            placeholder="Password"
+            id="password"
+            type="password"
+            {...register('password', { required: true, minLength: 6 })}
+          />
+          {errors.password && errors.password.type === 'required' && <ErrorText>필수 입력입니다.</ErrorText>}
+          {errors.password && errors.password.type === 'minLength' && <ErrorText>6자 이상으로 작성해주세요.</ErrorText>}
         </LoginInputBox>
-        <LargeButton type="submit">Submit</LargeButton>
+
+        <LargeButton type="submit" disabled={loading}>
+          Submit
+        </LargeButton>
         <SignupBox>
           <p>Don't have any account?</p>
           <SmallButton onClick={(e) => e.preventDefault()}>Sign up</SmallButton>
@@ -65,16 +99,19 @@ const LoginText = styled.p`
   margin-bottom: 30px;
 `;
 const LoginInputBox = styled.div`
-  display: flex;
+  /* display: flex; */
+  position: relative;
   justify-content: center;
   align-items: center;
   position: relative;
   width: 100%;
+  height: 80px;
 `;
 
 const LoginInputIcon = styled.span`
   position: absolute;
   left: 10px;
+  top: 20px;
 `;
 const LoginInputField = styled.input`
   width: 100%;
@@ -112,4 +149,14 @@ const SignupBox = styled.div`
     font-weight: var(--font-weight-body-regular);
     color: ${(props) => props.theme.colors.text.title};
   }
+`;
+
+const ErrorText = styled.p`
+  position: absolute;
+  bottom: 0;
+  align-self: flex-start;
+  color: ${(props) => props.theme.colors.danger.normal};
+  font-size: var(--font-size-body-regular);
+  font-weight: var(--font-weight-body-regular);
+  margin: 5px 0;
 `;
