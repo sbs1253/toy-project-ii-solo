@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import Profile from '../../component/profile';
 import Card from '../../component/card';
 import { useState } from 'react';
-
+import { useLoading } from '../../../hooks/useLoading';
+import Loading from '../../component/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CorrectionRequestModal from '../../component/modal';
 import { Button } from 'antd';
-import { addCorrectionRequest } from '../../redux/reducer/userThunks';
+import { addCorrectionRequestThunk } from '../../redux/reducer/userThunks';
 import { SmallButton } from '../../component/Button.styles';
 const PayrollDetails = () => {
   const profileData = useSelector((state) => state.user.data.profileData);
   const payrollData = useSelector((state) => state.user.data.payrollData);
-
+  const status = useSelector((state) => state.user.status);
+  const [loading, error] = useLoading(status);
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -26,7 +28,7 @@ const PayrollDetails = () => {
   const handleSubmit = (values) => {
     const newRequest = {
       title: values.title,
-      manager: '담당자: 송병훈', // 이 부분은 실제 로직에 맞게 조정하세요
+      manager: '담당자: 송병훈',
       items: [
         { label: '날짜', value: values.date.format('YY.MM.DD') },
         { label: '내용', value: values.content },
@@ -34,20 +36,20 @@ const PayrollDetails = () => {
         { label: '상태', value: '처리중' },
       ],
     };
-    console.log(newRequest);
-    dispatch(addCorrectionRequest(newRequest));
+    dispatch(addCorrectionRequestThunk(newRequest));
     setModalVisible(false);
   };
 
   return (
     <PayrollContainer>
+      {loading && <Loading />}
       <CorrectionRequestModal visible={modalVisible} onCancel={handleCancel} onSubmit={handleSubmit} />
       <Profile profileData={profileData} />
       <PayrollBox>
         <PayrollTitle>급여 명세</PayrollTitle>
         <RequestButton onClick={showModal}>정정신청하기</RequestButton>
-        {payrollData.map((data) => (
-          <Card data={data} text={'급여 명세 확인'} />
+        {payrollData.map((data, index) => (
+          <Card key={index} data={data} text={'급여 명세 확인'} />
         ))}
       </PayrollBox>
     </PayrollContainer>

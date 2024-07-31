@@ -1,36 +1,61 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLogin, addCorrectionRequest, deleteCorrectionRequestThunk } from './userThunks';
+import { fetchLoginThunk, addCorrectionRequestThunk, deleteCorrectionRequestThunk } from './userThunks';
 
 let initialState = {
-  data: null,
+  data: {},
   status: '',
+  isLogin: false,
   error: null,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser: (state) => {
+      state.data = {};
+      state.status = '';
+      state.isLogin = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLogin.pending, (state) => {
+      .addCase(fetchLoginThunk.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchLogin.fulfilled, (state, action) => {
+      .addCase(fetchLoginThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.isLogin = true;
         state.data = action.payload;
       })
-      .addCase(fetchLogin.rejected, (state, action) => {
+      .addCase(fetchLoginThunk.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       })
-      .addCase(addCorrectionRequest.fulfilled, (state, action) => {
+      .addCase(addCorrectionRequestThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addCorrectionRequestThunk.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         state.data.correctionRequests = action.payload;
       })
+      .addCase(addCorrectionRequestThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(deleteCorrectionRequestThunk.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(deleteCorrectionRequestThunk.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         state.data.correctionRequests = action.payload;
+      })
+      .addCase(deleteCorrectionRequestThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
   },
 });
-
+export const { clearUser } = userSlice.actions;
 export default userSlice.reducer;
