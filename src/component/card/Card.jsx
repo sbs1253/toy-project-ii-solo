@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import List from './List';
 import { SmallButton } from '../Button.styles';
-const Card = ({ payrollData, src, text }) => {
-  console.log(text);
+
+const Card = ({ data, src, text, onCardClick }) => {
   return (
     <CardContainer>
       <CardTitle>
@@ -15,12 +15,14 @@ const Card = ({ payrollData, src, text }) => {
           />
         )}
         <div>
-          <h2>{payrollData.title}</h2>
-          <p>{payrollData.manager}</p>
+          <h2>{data.title}</h2>
+          <p>{data.manager}</p>
         </div>
       </CardTitle>
-      <List items={payrollData.items} />
-      <CardButton $text={text}>{text}</CardButton>
+      <List items={data.items} />
+      <CardButton onClick={onCardClick} $text={text}>
+        {text}
+      </CardButton>
     </CardContainer>
   );
 };

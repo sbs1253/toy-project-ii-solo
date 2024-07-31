@@ -1,23 +1,34 @@
-import Profilebox from '../../component/profile';
+import Profile from '../../component/profile';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Card from '../../component/card';
+import { useDispatch } from 'react-redux';
+import { deleteCorrectionRequestThunk } from '../../redux/reducer/userThunks';
+
 const CorrectionRequestRecords = () => {
+  const dispatch = useDispatch();
   const profileData = useSelector((state) => {
-    console.log(state);
-    return state.profileData;
+    return state.user.data.profileData;
   });
-  const correctionData = useSelector((state) => state.correctionData);
+  const correctionRequests = useSelector((state) => state.user.data.correctionRequests);
+
+  console.log(correctionRequests);
+  const onCardClick = (id) => {
+    console.log(id);
+    dispatch(deleteCorrectionRequestThunk(id));
+  };
+
   const iconSrc =
     'https://image-resource.creatie.ai/129853559902101/129853559902103/d52a3cab2e07adcfb4a3fc44f581abd0.png';
+
   return (
     <CorrectionContainer>
-      <Profilebox profileData={profileData} />
+      <Profile profileData={profileData} />
       <CorrectionBox>
         <CorrectTitle>정정내역</CorrectTitle>
 
-        {correctionData.map((data) => (
-          <Card payrollData={data} text={'취소'} src={iconSrc} />
+        {correctionRequests?.map((data) => (
+          <Card key={data.id} data={data} text={'취소'} src={iconSrc} onCardClick={() => onCardClick(data.id)} />
         ))}
       </CorrectionBox>
     </CorrectionContainer>
