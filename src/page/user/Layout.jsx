@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 export default function Layout() {
   const userStatus = useSelector((state) => state.user.status);
 
-  if (userStatus !== 'succeeded') {
+  if (userStatus === '') {
     return <Navigate to={{ pathname: '/login' }} />;
   }
 

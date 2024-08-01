@@ -1,10 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { useSelector } from 'react-redux';
+import { clearUser } from '../redux/reducer/userSlice';
+import { useDispatch } from 'react-redux';
 const Navbar = () => {
   const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const dispatch = useDispatch();
   const handleNavigate = (path) => {
     navigate(path);
+  };
+  const handleLogout = () => {
+    dispatch(clearUser());
   };
   return (
     <NavbarContainer>
@@ -17,12 +24,16 @@ const Navbar = () => {
       <NavbarButton onClick={() => handleNavigate('/correction-request-records')}>
         <ion-icon name="file-tray-full-outline"></ion-icon>
       </NavbarButton>
-      <NavbarButton onClick={() => handleNavigate('/login')}>
-        <ion-icon name="log-in-outline"></ion-icon>
-      </NavbarButton>
-      {/* <NavbarButton onClick={() => handleNavigate('/login')}>
-        <ion-icon name="log-out-outline"></ion-icon>
-      </NavbarButton> */}
+
+      {isLogin ? (
+        <NavbarButton onClick={handleLogout}>
+          <ion-icon name="log-out-outline"></ion-icon>
+        </NavbarButton>
+      ) : (
+        <NavbarButton onClick={() => handleNavigate('/login')}>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </NavbarButton>
+      )}
     </NavbarContainer>
   );
 };

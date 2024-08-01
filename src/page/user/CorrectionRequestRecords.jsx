@@ -4,15 +4,14 @@ import { useSelector } from 'react-redux';
 import Card from '../../component/card';
 import { useDispatch } from 'react-redux';
 import { deleteCorrectionRequestThunk } from '../../redux/reducer/userThunks';
-
+import { useLoading } from '../../../hooks/useLoading';
+import Loading from '../../component/Loading';
 const CorrectionRequestRecords = () => {
   const dispatch = useDispatch();
-  const profileData = useSelector((state) => {
-    return state.user.data.profileData;
-  });
-  const correctionRequests = useSelector((state) => state.user.data.correctionRequests);
+  const { profileData, correctionRequests } = useSelector((state) => state.user.data);
+  const userStatus = useSelector((state) => state.user.status);
+  const [loading, error] = useLoading(userStatus);
 
-  console.log(correctionRequests);
   const onCardClick = (id) => {
     console.log(id);
     dispatch(deleteCorrectionRequestThunk(id));
@@ -23,6 +22,7 @@ const CorrectionRequestRecords = () => {
 
   return (
     <CorrectionContainer>
+      {loading && <Loading />}
       <Profile profileData={profileData} />
       <CorrectionBox>
         <CorrectTitle>정정내역</CorrectTitle>

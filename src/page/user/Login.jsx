@@ -2,16 +2,14 @@ import app from '../../firebase';
 import { styled } from 'styled-components';
 import { media } from '../../themes/media';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { fetchLogin } from '../../redux/reducer/userThunks';
+import { fetchLoginThunk } from '../../redux/reducer/userThunks';
 import { LargeButton, SmallButton } from '../../component/Button.styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
+import { useLoading } from '../../../hooks/useLoading';
+import Loading from '../../component/Loading';
 const Login = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -19,16 +17,18 @@ const Login = () => {
   } = useForm();
 
   const userStatus = useSelector((state) => state.user.status);
+  const [loading, error] = useLoading(userStatus);
+
+  const onSubmit = ({ email, password }) => {
+    dispatch(fetchLoginThunk({ email, password }));
+  };
+
   if (userStatus === 'succeeded') {
     return <Navigate to="/" />;
   }
-  const onSubmit = ({ email, password }) => {
-    setLoading(true);
-    dispatch(fetchLogin({ email, password }));
-    setLoading(false);
-  };
   return (
     <LoginContainer>
+      {loading && <Loading />}
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <LoginText>Login</LoginText>
         <LoginInputBox>
@@ -59,9 +59,7 @@ const Login = () => {
           {errors.password && errors.password.type === 'minLength' && <ErrorText>6자 이상으로 작성해주세요.</ErrorText>}
         </LoginInputBox>
 
-        <LargeButton type="submit" disabled={loading}>
-          Submit
-        </LargeButton>
+        <LargeButton type="submit">Submit</LargeButton>
         <SignupBox>
           <p>Don't have any account?</p>
           <SmallButton onClick={(e) => e.preventDefault()}>Sign up</SmallButton>
