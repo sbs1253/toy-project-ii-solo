@@ -1,6 +1,6 @@
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import styled from 'styled-components';
-const Loading = ({ loading }) => {
+const Loading = () => {
   return (
     <Box>
       <PacmanLoader color="#ffffff" size={35} />

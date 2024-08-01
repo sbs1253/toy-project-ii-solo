@@ -6,6 +6,7 @@ let initialState = {
   status: '',
   isLogin: false,
   error: null,
+  showSuccessBox: false,
 };
 
 const userSlice = createSlice({
@@ -17,6 +18,13 @@ const userSlice = createSlice({
       state.status = '';
       state.isLogin = false;
       state.error = null;
+      state.showSuccessBox = false;
+    },
+    setShowSuccessBox: (state, action) => {
+      state.showSuccessBox = action.payload;
+    },
+    setShowErrorBox: (state, action) => {
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -39,6 +47,7 @@ const userSlice = createSlice({
       .addCase(addCorrectionRequestThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data.correctionRequests = action.payload;
+        state.showSuccessBox = true;
       })
       .addCase(addCorrectionRequestThunk.rejected, (state, action) => {
         state.status = 'failed';
@@ -50,6 +59,7 @@ const userSlice = createSlice({
       .addCase(deleteCorrectionRequestThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data.correctionRequests = action.payload;
+        state.showSuccessBox = true;
       })
       .addCase(deleteCorrectionRequestThunk.rejected, (state, action) => {
         state.status = 'failed';
@@ -57,5 +67,5 @@ const userSlice = createSlice({
       });
   },
 });
-export const { clearUser } = userSlice.actions;
+export const { clearUser, setShowSuccessBox, setShowErrorBox } = userSlice.actions;
 export default userSlice.reducer;

@@ -5,9 +5,12 @@ import { useForm } from 'react-hook-form';
 import { fetchLoginThunk } from '../../redux/reducer/userThunks';
 import { LargeButton, SmallButton } from '../../component/Button.styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useLoading } from '../../../hooks/useLoading';
+import { useLoading } from '../../hooks/useLoading';
 import Loading from '../../component/Loading';
+import { ErrorBox, SuccessBox } from '../../component/AlertBox';
+import { setShowErrorBox } from '../../redux/reducer/userSlice';
 const Login = () => {
   const dispatch = useDispatch();
   const {
@@ -15,20 +18,37 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  // const [error, setError] = useState('');
   const userStatus = useSelector((state) => state.user.status);
-  const [loading, error] = useLoading(userStatus);
+  const userIsLogin = useSelector((state) => state.user.isLogin);
+
+  const loading = useLoading(userStatus);
+  const [visible, setVisible] = useState(false);
+  const userError = useSelector((state) => state.user.error);
 
   const onSubmit = ({ email, password }) => {
     dispatch(fetchLoginThunk({ email, password }));
   };
 
-  if (userStatus === 'succeeded') {
+  useEffect(() => {
+    if (userError) {
+      setVisible(true);
+
+      const timer = setTimeout(() => {
+        setVisible(false);
+        dispatch(setShowErrorBox(false));
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [userError, dispatch]);
+  if (userIsLogin) {
     return <Navigate to="/" />;
   }
   return (
     <LoginContainer>
       {loading && <Loading />}
+      {visible && <ErrorBox description={userError} />}
+
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <LoginText>Login</LoginText>
         <LoginInputBox>

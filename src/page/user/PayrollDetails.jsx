@@ -1,21 +1,26 @@
 import styled from 'styled-components';
 import Profile from '../../component/profile';
 import Card from '../../component/card';
-import { useState } from 'react';
-import { useLoading } from '../../../hooks/useLoading';
+import { useState, useEffect } from 'react';
+import { useLoading } from '../../hooks/useLoading';
 import Loading from '../../component/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CorrectionRequestModal from '../../component/modal';
-import { Button } from 'antd';
 import { addCorrectionRequestThunk } from '../../redux/reducer/userThunks';
 import { SmallButton } from '../../component/Button.styles';
+import { SuccessBox } from '../../component/AlertBox';
+import { setShowSuccessBox } from '../../redux/reducer/userSlice';
 const PayrollDetails = () => {
+  const dispatch = useDispatch();
   const profileData = useSelector((state) => state.user.data.profileData);
   const payrollData = useSelector((state) => state.user.data.payrollData);
-  const status = useSelector((state) => state.user.status);
-  const [loading, error] = useLoading(status);
+  const userStatus = useSelector((state) => state.user.status);
+  const userError = useSelector((state) => state.user.error);
+  const showSuccessBox = useSelector((state) => state.user.showSuccessBox);
+
   const [modalVisible, setModalVisible] = useState(false);
-  const dispatch = useDispatch();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const loading = useLoading(userStatus);
 
   const showModal = () => {
     setModalVisible(true);
@@ -40,9 +45,22 @@ const PayrollDetails = () => {
     setModalVisible(false);
   };
 
+  useEffect(() => {
+    if (showSuccessBox) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+        dispatch(setShowSuccessBox(false));
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessBox, dispatch]);
+
   return (
     <PayrollContainer>
       {loading && <Loading />}
+      {showSuccess && <SuccessBox description="정정신청이 성공적으로 완료되었습니다." />}
+      {userError && <ErrorBox description={userError} />}
       <CorrectionRequestModal visible={modalVisible} onCancel={handleCancel} onSubmit={handleSubmit} />
       <Profile profileData={profileData} />
       <PayrollBox>
