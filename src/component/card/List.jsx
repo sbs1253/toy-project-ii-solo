@@ -19,7 +19,7 @@ const ListContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 40px;
-  width: 100%;
+  max-width: 100px;
 `;
 
 const ListItem = styled.div`
@@ -27,10 +27,10 @@ const ListItem = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  min-width: 50px;
 `;
 
 const Label = styled.span`
-  min-width: 40px;
   color: ${(props) => props.theme.colors.text.body};
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-caption);

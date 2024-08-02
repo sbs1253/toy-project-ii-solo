@@ -2,9 +2,9 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function Layout() {
-  const userStatus = useSelector((state) => state.user.status);
+  const userisLogin = useSelector((state) => state.user.isLogin);
 
-  if (userStatus === '') {
+  if (!userisLogin) {
     return <Navigate to={{ pathname: '/login' }} />;
   }
 
