@@ -39,6 +39,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchLoginThunk.rejected, (state, action) => {
         state.status = 'failed';
+        console.log(action.payload);
         state.error = action.payload;
       })
       .addCase(addCorrectionRequestThunk.pending, (state) => {

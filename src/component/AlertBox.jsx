@@ -1,20 +1,10 @@
 import { Alert } from 'antd';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export const ErrorBox = ({ description }) => {
   return (
     <>
-      <AlertBox
-        message="Error"
-        description={description || '에러가 발생했습니다.'}
-        type="error"
-        showIcon
-        closable
-        onClose={() => {
-          setVisible(false);
-        }}
-      />
+      <AlertBox message="Error" description={description || '에러가 발생했습니다.'} type="error" showIcon closable />
     </>
   );
 };

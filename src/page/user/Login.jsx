@@ -25,7 +25,7 @@ const Login = () => {
   const loading = useLoading(userStatus);
   const [visible, setVisible] = useState(false);
   const userError = useSelector((state) => state.user.error);
-
+  console.log(userError);
   const onSubmit = ({ email, password }) => {
     dispatch(fetchLoginThunk({ email, password }));
   };
