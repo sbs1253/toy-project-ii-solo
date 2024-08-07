@@ -10,7 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
     "@reduxjs/toolkit": "^2.2.7",
+    "@ant-design/icons": "^5.4.0",
     "antd": "^5.19.4",
     "axios": "^1.7.2",
     "firebase": "^10.12.4",
@@ -21,7 +27,8 @@
     "react-router-dom": "^6.25.1",
     "react-spinners": "^0.14.1",
     "styled-components": "^6.1.12",
-    "styled-reset": "^4.5.2"
+    "styled-reset": "^4.5.2",
+    "dayjs": "^1.11.12"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

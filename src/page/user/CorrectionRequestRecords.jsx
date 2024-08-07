@@ -12,7 +12,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 const CorrectionRequestRecords = () => {
   const dispatch = useDispatch();
-  const { profileData, correctionRequests } = useSelector((state) => state.user.data);
+  const profileData = useSelector((state) => state.user.data.profileData);
+  const correctionRequests = useSelector((state) => state.user.data.correctionRequests);
   const userStatus = useSelector((state) => state.user.status);
   const showSuccessBox = useSelector((state) => state.user.showSuccessBox);
   const [showSuccess, setShowSuccess] = useState(false);

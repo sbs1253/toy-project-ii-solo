@@ -1,20 +1,32 @@
 import styled from 'styled-components';
 import Profile from '../../component/profile';
 import { useDispatch, useSelector } from 'react-redux';
-// import { setProfileData } from '../../redux/reducer/reducer';
+import Calendar from '../../component/calendar/Calendar';
+import { useLoading } from '../../hooks/useLoading';
+import Loading from '../../component/Loading';
+
 const Home = () => {
   const profileData = useSelector((state) => {
     return state.user.data.profileData;
   });
+  const userStatus = useSelector((state) => {
+    return state.user.status;
+  });
+  const loading = useLoading(userStatus);
 
-  // const updateProfile = () => {
-  //   dispatch(setProfileData(profile));
-  // };
   return (
-    <div>
+    <HomeContainer>
+      {loading && <Loading />}
       <Profile profileData={profileData} />
-    </div>
+      <Calendar />
+    </HomeContainer>
   );
 };
 
 export default Home;
+
+const HomeContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+`;

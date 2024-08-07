@@ -57,3 +57,34 @@ export const updateCorrectionRequestFirebase = async (userId, requestId, updated
   const requestDocRef = doc(collection(userDocRef, 'correctionRequests'), requestId);
   await updateDoc(requestDocRef, updatedData);
 };
+
+export const addTaskFirebase = async (userId, data) => {
+  console.log(data);
+  const userDocRef = doc(db, 'users', userId);
+  const usetCollection = collection(userDocRef, 'tasks');
+  await addDoc(usetCollection, data);
+};
+
+export const deleteTaskFirebase = async (userId, taskId) => {
+  const userDocRef = doc(db, 'users', userId);
+  const taskDocRef = doc(userDocRef, 'tasks', taskId);
+  await deleteDoc(taskDocRef);
+};
+
+export const fetchTasksFirebase = async (userId) => {
+  const userDocRef = doc(db, 'users', userId);
+  const tasksCollectionRef = collection(userDocRef, 'tasks');
+  const querySnapshot = await getDocs(tasksCollectionRef);
+
+  return querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
+
+export const updateTaskFirebase = async (userId, taskId, updatedData) => {
+  console.log(userId, taskId, updatedData);
+  const userDocRef = doc(db, 'users', userId);
+  const taskDocRef = doc(collection(userDocRef, 'tasks'), taskId);
+  await updateDoc(taskDocRef, updatedData);
+};
