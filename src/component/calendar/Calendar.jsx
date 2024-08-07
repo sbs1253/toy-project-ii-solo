@@ -63,6 +63,17 @@ const Calendar = () => {
     form.resetFields();
   };
 
+  const handleEventDrop = (info) => {
+    const { id, start, end } = info.event;
+
+    const updatedData = {
+      start: dayjs(start).format('YYYY-MM-DD'),
+      end: dayjs(end).format('YYYY-MM-DD'),
+    };
+
+    dispatch(updateTaskThunk({ taskId: id, data: updatedData }));
+  };
+
   const handleTask = useCallback(
     (date) => {
       const currentTask = data.filter((task) => task.start === date);
@@ -96,6 +107,7 @@ const Calendar = () => {
         select={(info) => handleDateClick(info)}
         eventClick={(info) => handleTask(info.event.startStr)}
         editable={true}
+        eventDrop={handleEventDrop}
         weekends={true}
         events={data}
         eventDidMount={(info) => {
