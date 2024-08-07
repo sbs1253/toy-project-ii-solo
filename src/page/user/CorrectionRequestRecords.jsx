@@ -22,7 +22,6 @@ const CorrectionRequestRecords = () => {
     'https://image-resource.creatie.ai/129853559902101/129853559902103/d52a3cab2e07adcfb4a3fc44f581abd0.png';
 
   const onCardClick = (id) => {
-    console.log(id);
     dispatch(deleteCorrectionRequestThunk(id));
   };
 

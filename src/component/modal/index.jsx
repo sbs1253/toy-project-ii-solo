@@ -5,7 +5,6 @@ const CorrectionRequestModal = ({ visible, onCancel, onSubmit }) => {
 
   const handleSubmit = () => {
     form.validateFields().then((values) => {
-      console.log(values);
       onSubmit(values);
       form.resetFields();
     });

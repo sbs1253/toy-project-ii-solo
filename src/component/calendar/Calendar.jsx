@@ -13,7 +13,6 @@ import { addTaskThunk, deleteTaskThunk, updateTaskThunk } from '../../redux/redu
 const Calendar = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.user.data.tasks);
-  const userStatus = useSelector((state) => state.user.status);
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editTask, setEditTask] = useState('');
@@ -30,7 +29,6 @@ const Calendar = () => {
 
   const handleDateUpdate = (values) => {
     const task = data.find((task) => task.id === values.id);
-    console.log(task);
     form.setFieldsValue({
       title: values.title,
       start: dayjs(values.start),
@@ -46,7 +44,6 @@ const Calendar = () => {
   };
 
   const handleSubmit = (values) => {
-    console.log(editTask);
     const newTask = {
       title: values.title,
       start: values.start.format('YYYY-MM-DD'),

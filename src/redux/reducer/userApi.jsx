@@ -48,7 +48,6 @@ export const fetchCorrectionRequestFirebase = async (userId) => {
 export const deleteCorrectionRequestFirebase = async (userId, requestId) => {
   const userDocRef = doc(db, 'users', userId);
   const correctionRequestDocRef = doc(userDocRef, 'correctionRequests', requestId);
-  console.log(correctionRequestDocRef);
   await deleteDoc(correctionRequestDocRef);
 };
 
@@ -59,7 +58,6 @@ export const updateCorrectionRequestFirebase = async (userId, requestId, updated
 };
 
 export const addTaskFirebase = async (userId, data) => {
-  console.log(data);
   const userDocRef = doc(db, 'users', userId);
   const usetCollection = collection(userDocRef, 'tasks');
   await addDoc(usetCollection, data);
@@ -83,7 +81,6 @@ export const fetchTasksFirebase = async (userId) => {
 };
 
 export const updateTaskFirebase = async (userId, taskId, updatedData) => {
-  console.log(userId, taskId, updatedData);
   const userDocRef = doc(db, 'users', userId);
   const taskDocRef = doc(collection(userDocRef, 'tasks'), taskId);
   await updateDoc(taskDocRef, updatedData);

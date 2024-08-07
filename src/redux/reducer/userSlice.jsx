@@ -77,7 +77,6 @@ const userSlice = createSlice({
       })
       .addCase(addTaskThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(state.data, action.payload);
         state.data.tasks = action.payload;
       })
       .addCase(addTaskThunk.rejected, (state, action) => {

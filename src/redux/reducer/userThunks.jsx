@@ -66,7 +66,6 @@ export const deleteCorrectionRequestThunk = createAsyncThunk(
 );
 
 export const addTaskThunk = createAsyncThunk('user/addTask', async (data, { getState, rejectWithValue }) => {
-  console.log(data);
   try {
     const { user } = getState();
     // 파이어베이스에 일정 추가하기

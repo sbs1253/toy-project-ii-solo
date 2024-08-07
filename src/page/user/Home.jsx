@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Profile from '../../component/profile';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Calendar from '../../component/calendar/Calendar';
 import { useLoading } from '../../hooks/useLoading';
 import Loading from '../../component/Loading';
