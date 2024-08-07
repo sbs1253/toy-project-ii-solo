@@ -50,6 +50,7 @@ const NavbarContainer = styled.div`
   height: 40px;
   background-color: ${(props) => props.theme.colors.text.title};
   overflow: hidden;
+  z-index: 100;
 `;
 const NavbarButton = styled.button`
   display: flex;

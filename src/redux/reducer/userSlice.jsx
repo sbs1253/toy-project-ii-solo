@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLoginThunk, addCorrectionRequestThunk, deleteCorrectionRequestThunk } from './userThunks';
+import {
+  fetchLoginThunk,
+  addCorrectionRequestThunk,
+  deleteCorrectionRequestThunk,
+  addTaskThunk,
+  deleteTaskThunk,
+  updateTaskThunk,
+} from './userThunks';
 
 let initialState = {
   data: {},
@@ -63,6 +70,39 @@ const userSlice = createSlice({
         state.showSuccessBox = true;
       })
       .addCase(deleteCorrectionRequestThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(addTaskThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addTaskThunk.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data.tasks = action.payload;
+      })
+      .addCase(addTaskThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(deleteTaskThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteTaskThunk.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data.tasks = action.payload;
+      })
+      .addCase(deleteTaskThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(updateTaskThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateTaskThunk.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data.tasks = action.payload;
+      })
+      .addCase(updateTaskThunk.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });

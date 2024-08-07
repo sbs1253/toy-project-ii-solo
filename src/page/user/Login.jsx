@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useLoading } from '../../hooks/useLoading';
 import Loading from '../../component/Loading';
-import { ErrorBox, SuccessBox } from '../../component/AlertBox';
+import { ErrorBox } from '../../component/AlertBox';
 import { setShowErrorBox } from '../../redux/reducer/userSlice';
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // const [error, setError] = useState('');
   const userStatus = useSelector((state) => state.user.status);
   const userIsLogin = useSelector((state) => state.user.isLogin);
 

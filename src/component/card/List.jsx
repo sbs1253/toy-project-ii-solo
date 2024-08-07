@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const List = ({ items }) => {
-  // console.log(items);
   return (
     <ListContainer>
       {items?.map(({ label, value }, index) => (
