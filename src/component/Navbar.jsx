@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { clearUser } from '../redux/reducer/userSlice';
-import { useDispatch } from 'react-redux';
-const Navbar = () => {
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
+const Navbar = ({ onClick, mode }) => {
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.user.isLogin);
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ const Navbar = () => {
           <ion-icon name="log-in-outline"></ion-icon>
         </NavbarButton>
       )}
+      <NavbarButton onClick={onClick}>
+        {mode === 'light' ? <LightModeOutlinedIcon /> : <NightlightOutlinedIcon />}
+      </NavbarButton>
     </NavbarContainer>
   );
 };
@@ -52,6 +56,7 @@ const NavbarContainer = styled.div`
   overflow: hidden;
   z-index: 100;
 `;
+
 const NavbarButton = styled.button`
   display: flex;
   align-items: center;
@@ -59,15 +64,17 @@ const NavbarButton = styled.button`
   width: 100%;
   height: 100%;
   background-color: transparent;
-  color: ${(props) => props.theme.colors.background[1]};
   outline: none;
   border: none;
-  font-size: var(--font-size-h3);
-  line-height: var(--line-height-body-bold);
-  font-weight: var(--font-weight-body-bold);
   transition: all ease-in-out 0.3s;
   cursor: pointer;
-
+  svg,
+  & {
+    color: ${(props) => props.theme.colors.background[1]};
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-body-bold);
+    font-weight: var(--font-weight-body-bold);
+  }
   &:hover {
     transform: translateY(-3px);
   }

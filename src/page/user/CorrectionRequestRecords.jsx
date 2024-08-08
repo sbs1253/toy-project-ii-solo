@@ -24,22 +24,27 @@ const CorrectionRequestRecords = () => {
   const onCardClick = (id) => {
     dispatch(deleteCorrectionRequestThunk(id));
   };
-
+  const handleSuccess = () => {
+    setShowSuccess(false);
+    dispatch(setShowSuccessBox(false));
+  };
   useEffect(() => {
     if (showSuccessBox) {
       setShowSuccess(true);
       const timer = setTimeout(() => {
-        setShowSuccess(false);
-        dispatch(setShowSuccessBox(false));
+        handleSuccess();
       }, 3000);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        handleSuccess();
+      };
     }
   }, [showSuccessBox, dispatch]);
 
   return (
     <CorrectionContainer>
       {loading && <Loading />}
-      {showSuccess && <SuccessBox description="정정내역이 성공적으로 삭제되었습니다." />}
+      {showSuccess && <SuccessBox description="정정내역이 성공적으로 삭제되었습니다." handleSuccess={handleSuccess} />}
       <Profile profileData={profileData} />
       <CorrectionBox>
         <CorrectTitle>정정내역</CorrectTitle>

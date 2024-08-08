@@ -29,7 +29,7 @@ const ProfileContainer = styled.div`
 
 const ProfileNotification = styled.span`
   position: absolute;
-  right: 60px;
+  right: 20px;
   top: 20px;
   font-size: 24px;
 `;

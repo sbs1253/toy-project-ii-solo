@@ -5,7 +5,6 @@ import { lightTheme, darkTheme } from './themes/themes';
 import { GlobalStyle } from './themes/GlobalStyle';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import ThemeButton from './component/ThemeButton';
 import Home from './page/user/Home';
 import Login from './page/user/Login';
 import Navbar from './component/Navbar';
@@ -14,19 +13,19 @@ import CorrectionRequestRecords from './page/user/CorrectionRequestRecords';
 import Layout from './page/user/Layout';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [mode, setMode] = useState('light');
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setMode(mode === 'light' ? 'dark' : 'light');
   };
 
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
           <GlobalStyle />
-          <ThemeButton onClick={toggleTheme} />
-          <Navbar />
+          {/* <ThemeButton onClick={toggleTheme} theme={theme} /> */}
+          <Navbar onClick={toggleTheme} mode={mode} />
 
           <Routes>
             <Route path="/" element={<Layout />}>

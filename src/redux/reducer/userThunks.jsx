@@ -14,7 +14,6 @@ import app from '../../firebase';
 
 export const fetchLoginThunk = createAsyncThunk('user/fetchLogin', async ({ email, password }, { rejectWithValue }) => {
   try {
-    const auth = getAuth(app);
     // 파이어베이스에 로그인인증 받기
     const auth = getAuth(app);
     const userAuth = await signInWithEmailAndPassword(auth, email, password);

@@ -74,7 +74,7 @@ const Calendar = () => {
     dispatch(updateTaskThunk({ taskId: id, data: updatedData }));
   };
 
-  const handleTask = useCallback(
+  const handleDateTask = useCallback(
     (date) => {
       const currentTask = data.filter((task) => task.start === date);
       setTasks(currentTask);
@@ -84,14 +84,14 @@ const Calendar = () => {
 
   useEffect(() => {
     if (selectDate) {
-      handleTask(selectDate);
+      handleDateTask(selectDate);
     } else {
       const today = new Date();
       const todayString = dayjs(today).format('YYYY-MM-DD');
       const todayTasks = data.filter((task) => task.start === todayString);
       setTasks(todayTasks);
     }
-  }, [data, selectDate, handleTask]);
+  }, [data, selectDate, handleDateTask]);
 
   return (
     <CalendarContainer>
@@ -105,7 +105,7 @@ const Calendar = () => {
         }}
         selectable={true}
         select={(info) => handleDateClick(info)}
-        eventClick={(info) => handleTask(info.event.startStr)}
+        eventClick={(info) => handleDateTask(info.event.startStr)}
         editable={true}
         eventDrop={handleEventDrop}
         weekends={true}

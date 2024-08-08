@@ -45,21 +45,28 @@ const PayrollDetails = () => {
     setModalVisible(false);
   };
 
+  const handleSuccess = () => {
+    setShowSuccess(false);
+    dispatch(setShowSuccessBox(false));
+  };
+
   useEffect(() => {
     if (showSuccessBox) {
       setShowSuccess(true);
       const timer = setTimeout(() => {
-        setShowSuccess(false);
-        dispatch(setShowSuccessBox(false));
+        handleSuccess();
       }, 3000);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        handleSuccess();
+      };
     }
   }, [showSuccessBox, dispatch]);
 
   return (
     <PayrollContainer>
       {loading && <Loading />}
-      {showSuccess && <SuccessBox description="정정신청이 성공적으로 완료되었습니다." />}
+      {showSuccess && <SuccessBox description="정정신청이 성공적으로 완료되었습니다." handleSuccess={handleSuccess} />}
       {userError && <ErrorBox description={userError} />}
       <CorrectionRequestModal visible={modalVisible} onCancel={handleCancel} onSubmit={handleSubmit} />
       <Profile profileData={profileData} />

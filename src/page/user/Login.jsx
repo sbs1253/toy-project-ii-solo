@@ -1,6 +1,4 @@
-import app from '../../firebase';
 import { styled } from 'styled-components';
-import { media } from '../../themes/media';
 import { useForm } from 'react-hook-form';
 import { fetchLoginThunk } from '../../redux/reducer/userThunks';
 import { LargeButton, SmallButton } from '../../component/Button.styles';
@@ -8,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useLoading } from '../../hooks/useLoading';
+import { useError } from '../../hooks/useError';
 import Loading from '../../component/Loading';
 import { ErrorBox } from '../../component/AlertBox';
 import { setShowErrorBox } from '../../redux/reducer/userSlice';
+
 const Login = () => {
   const dispatch = useDispatch();
   const {
@@ -20,11 +20,10 @@ const Login = () => {
   } = useForm();
   const userStatus = useSelector((state) => state.user.status);
   const userIsLogin = useSelector((state) => state.user.isLogin);
+  const userError = useSelector((state) => state.user.error);
 
   const loading = useLoading(userStatus);
   const [visible, setVisible] = useState(false);
-  const userError = useSelector((state) => state.user.error);
-  console.log(userError);
   const onSubmit = ({ email, password }) => {
     dispatch(fetchLoginThunk({ email, password }));
   };
@@ -116,7 +115,6 @@ const LoginText = styled.p`
   margin-bottom: 30px;
 `;
 const LoginInputBox = styled.div`
-  /* display: flex; */
   position: relative;
   justify-content: center;
   align-items: center;
