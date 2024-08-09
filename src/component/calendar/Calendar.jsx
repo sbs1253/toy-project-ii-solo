@@ -18,7 +18,7 @@ const Calendar = () => {
   const [editTask, setEditTask] = useState('');
   const [tasks, setTasks] = useState([]);
   const [selectDate, setSelectDate] = useState('');
-
+  const [title, setTitle] = useState('');
   const handleDateClick = (values) => {
     form.setFieldsValue({
       start: dayjs(values.startStr),
@@ -36,6 +36,7 @@ const Calendar = () => {
     });
     setEditTask(task);
     setModalVisible(true);
+    setTitle('이벤트 수정');
   };
 
   const handleDelete = (e, id) => {
@@ -60,6 +61,7 @@ const Calendar = () => {
     setModalVisible(false);
     setSelectDate(newTask.start);
     setEditTask('');
+    setTitle('');
     form.resetFields();
   };
 
@@ -119,11 +121,12 @@ const Calendar = () => {
         }}
       />
       <Modal
-        title="새 이벤트 추가"
+        title={title || '새 이벤트 추가'}
         open={modalVisible}
         onCancel={() => {
           form.resetFields();
           setEditTask('');
+          setTitle('');
           setModalVisible(false);
         }}
         footer={null}

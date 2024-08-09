@@ -1,17 +1,10 @@
 import { Alert } from 'antd';
 import styled from 'styled-components';
 
-export const ErrorBox = ({ description, setShowSuccess }) => {
+export const ErrorBox = ({ description }) => {
   return (
     <>
-      <AlertBox
-        message="Error"
-        description={description || '에러가 발생했습니다.'}
-        type="error"
-        showIcon
-        closable
-        onClose={() => setShowSuccess(false)}
-      />
+      <AlertBox message="Error" description={description || '에러가 발생했습니다.'} type="error" showIcon closable />
     </>
   );
 };
